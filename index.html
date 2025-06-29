@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ГИДонист (2ГИС)</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://mapgl.2gis.com/api/js/v1"></script>
+</head>
+<body>
+  <header>
+    <h1 class="logo-text"><span class="gid">ГИД</span><span class="onist">ОНИСТ</span></h1>
+    <div class="nav-links">
+      <a href="#">Газета</a>
+      <a href="#">О нас</a>
+    </div>
+  </header>
+
+  <div class="map-container">
+    <div class="filters">
+      <button onclick="drawRoute('short')">Короткий маршрут</button>
+      <button onclick="drawRoute('long')">Длинный маршрут</button>
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <footer>
+    <p>© 2023 ГИДонист. Все права защищены.</p>
+    <p>Разработано с любовью к Омску</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
