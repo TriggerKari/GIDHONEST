@@ -21,31 +21,45 @@ navigator.geolocation.getCurrentPosition((pos) => {
 function drawRoute(type) {
     const routes = {
         family: [
-            [73.371529, 54.991375],
-            [73.367116, 54.987547],
-            [73.368755, 54.989633],
+            { name: 'Успенский собор', coords: [73.371529, 54.991375] },
+            { name: 'Театр драмы', coords: [73.367116, 54.987547] },
+            { name: 'Филармония', coords: [73.368755, 54.989633] },
         ],
         budget5000: [
-            [73.371529, 54.991375],
-            [73.367116, 54.987547],
-            [73.368755, 54.989633],
+            { name: 'Парк 30‑летия ВЛКСМ', coords: [73.383100, 54.980300] },
+            { name: 'Успенский собор', coords: [73.371529, 54.991375] },
+            { name: 'Цирк', coords: [73.366000, 54.984000] },
+            { name: 'ТЦ "Континент"', coords: [73.401200, 54.989300] },
         ],
         budget10000: [
-            [73.371529, 54.991375],
-            [73.367116, 54.987547],
-            [73.368755, 54.989633],
-            [73.329942, 55.004675],
+            { name: 'Успенский собор', coords: [73.371529, 54.991375] },
+            { name: 'Филармония', coords: [73.368755, 54.989633] },
+            { name: 'ТЦ "МЕГА"', coords: [73.329942, 55.004675] },
+            { name: 'Аквапарк "АкваRIO"', coords: [73.388000, 54.940500] },
         ]
     };
-    const coords = routes[type];
 
+    const route = routes[type];
+    if (!route) return;
+
+    if (window.currentMarkers) {
+        window.currentMarkers.forEach((m) => m.destroy());
+    }
     if (window.currentLine) {
         currentLine.destroy();
     }
 
+    window.currentMarkers = route.map((p) =>
+        new mapgl.Marker(map, {
+            coordinates: p.coords,
+            label: { text: p.name, anchor: 'top' },
+        })
+    );
+
     window.currentLine = new mapgl.Polyline(map, {
-        coordinates: coords,
+        coordinates: route.map((p) => p.coords),
         color: '#ff6600',
-        width: 4
+        width: 4,
     });
+    map.setCenter(route[0].coords);
 }
