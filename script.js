@@ -46,7 +46,7 @@ function drawRoute(type) {
         window.currentMarkers.forEach((m) => m.destroy());
     }
     if (window.currentLine) {
-        currentLine.destroy();
+        window.currentLine.destroy();
     }
 
     window.currentMarkers = route.map((p) =>
